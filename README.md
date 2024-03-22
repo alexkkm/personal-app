@@ -19,34 +19,62 @@
    %ANDROID_SDK_ROOT%\tools  
    %ANDROID_SDK_ROOT%\tools\bin
 
-## Setup for the expo react-native
+## Setup for the new expo react-native project
 
-  ### Install Expo CLI:
-  
-  npm install -g expo-cli
+   ### Install Expo CLI:
+   ```
+   npm install -g expo-cli
+   ```
 
-  ### Create new project:
-  
-  npx crate-expo-app "nameOftheApp"
+   ### Create new project:
+   ```
+   npx create-expo-app "nameOftheApp"
+   ```
 
 
 
-  ### Login to expo account
-  
-  npx eas login
+   ### Login to expo account
+   ```
+   npx eas login
+   ```
 
-  #### (if cant run above eas command, try install eas-cli package instead)
-  
-  npm i -g eas-cli
-  
-  ### Build configuration for the project
-  
-  npx eas build:configure
-  
+   #### (if cant run above eas command, try install eas-cli package instead)
+   ```
+   npm i -g eas-cli
+   ```
 
-  
-  ### Run the App
-  
-  npm start
-  
-  ### You may need to retry "npm start" for many times, due to the installation process is slow
+   ### Build configuration for the project
+   ```
+   npx eas build:configure
+   ```
+
+
+
+   ### Run the App
+   ```
+   npm start
+   ```
+
+   ### You may need to retry "npm start" for many times, due to the installation process is slow
+
+## Configuration for this project
+   
+   ### Install node package
+   ```
+   npm i
+   ```
+
+   ### Install eas-cli
+   ```
+   npm i -g eas-cli
+   ```
+
+   ### Login to expo account
+   ```
+   npx eas login
+   ```
+
+   ### Run the App
+   ```
+   npm start
+   ```
