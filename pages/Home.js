@@ -20,6 +20,10 @@ const HomePage = ({ navigation }) => {
                 title="Auth"
                 onPress={() => navigation.navigate('FirebasePage')}
             />
+            <Button
+                title="Cyberpunk Style"
+                onPress={() => navigation.navigate('CyberpunkPage')}
+            />
             <StatusBar style="auto" />
         </View>
     );
