@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import RoutingPage from './pages/RoutingPage';
 import HomePage from './pages/Home';
 import FirebasePage from './pages/FirebasePage';
+import CyberpunkPage from './pages/CyberpunkPage';
 
 // Create a stack navigator
 const Stack = createNativeStackNavigator();
@@ -18,6 +19,7 @@ export default App = () => {
         <Stack.Screen name="Home" component={HomePage} />
         <Stack.Screen name="RoutingPage" component={RoutingPage} />
         <Stack.Screen name="FirebasePage" component={FirebasePage} />
+        <Stack.Screen name="CyberpunkPage" component={CyberpunkPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

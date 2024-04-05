@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+    position: relative;
+  }
+  
+  body {
+    background-color: #191a1e;
+    background-image: radial-gradient(
+      ellipse at 33% 10%,
+      #461616 0%,
+      transparent 75%
+    );
+    background-repeat: no-repeat;
+    color: #e8615a;
+    font-family: "Rajdhani", sans-serif;
+    font-size: 100%;
+    line-height: 1.4;
+    margin: 0;
+    min-height: 100vh;
+  }
+  
+  .messageBoard {
+    width: 400px;
+  }
+  
+  .pad {
+    background-color: #1e181e;
+    border: 2px solid #9c3230;
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - 1rem + 2px),
+      calc(100% - 1rem + 2px) 100%,
+      0 100%
+    );
+  }
+  
+  .pad__body {
+    padding: 0.75rem;
+    padding-bottom: 1rem;
+  }
+  
+  .pad::before {
+    background-color: #9c3230;
+    bottom: 5px;
+    content: "";
+    display: block;
+    height: 3px; /* bigger to compensate transform */
+    position: absolute;
+    right: -6px;
+    top: auto;
+    transform: rotate(-45deg);
+    width: 22.627416px;
+    z-index: 100;
+  }
