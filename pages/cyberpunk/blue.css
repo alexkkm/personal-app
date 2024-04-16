@@ -5,11 +5,12 @@
   
   body {
     background-color: #000000;
+    /*
     background-image:linear-gradient(
       to bottom,
       #01000f ,
       #000000
-    );
+    );*/
     background-repeat: no-repeat;
     color: #2be4ea;
     font-family: "Rajdhani", sans-serif;
@@ -28,7 +29,7 @@
   }
   
   .pad {
-    background-color: rgba(0, 240, 255, 0.1);
+    background-color: rgba(0, 240, 255, 0.05);
     border: 1px solid #00f0ff;
     border-radius: 5px;
     clip-path: polygon(

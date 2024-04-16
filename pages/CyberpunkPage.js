@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import MessageBoard from './new';
 
 const CyberpunkPage = ({ route, navigation }) => {
     const { itemId = "", otherField = "" } = route.params || {};
@@ -9,6 +10,7 @@ const CyberpunkPage = ({ route, navigation }) => {
             <Text style={styles.text}>Cyberpunk Page</Text>
             <StatusBar style="hidden" />
             <View style={styles.box}></View>
+            <MessageBoard />
         </View >
     );
 }
@@ -16,6 +18,8 @@ const CyberpunkPage = ({ route, navigation }) => {
 const styles = StyleSheet.create({
     main: {
         backgroundColor: '#000000',
+        width: 1000,
+        height: 1000,
     },
     text: {
         color: '#00f0ff'
@@ -27,7 +31,7 @@ const styles = StyleSheet.create({
         height: 100,
 
         // inner
-        backgroundColor: 'rgba(0, 240, 255, 0.1)',
+        backgroundColor: 'rgba(0, 240, 255, 0.05)',
         padding: 10,
 
         // border
