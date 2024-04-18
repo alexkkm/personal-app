@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
-import MessageBoard from './new';
+import MessageBoard from './MessageBoard';
 
 const CyberpunkPage = ({ route, navigation }) => {
     const { itemId = "", otherField = "" } = route.params || {};

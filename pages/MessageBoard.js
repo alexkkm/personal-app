@@ -21,8 +21,8 @@ const MessageBoard = () => {
 
 const styles = StyleSheet.create({
     messageBoard: {
-        left: '10%',
-        top: '10%',
+        left: 10,
+        top: 200,
         width: 400,
     },
     pad: {
@@ -30,7 +30,9 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#00f0ff',
         borderRadius: 5,
-        clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 1rem + 2px), calc(100% - 1rem + 2px) 100%, 0 100%)',
+
+        //TODO: clipPath is not supported by react-native, finding alernatives
+        //clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 1rem + 2px), calc(100% - 1rem + 2px) 100%, 0 100%)',
     },
     padBody: {
         padding: 12,
