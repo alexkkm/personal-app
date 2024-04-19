@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, TextInput, View, ScrollView } from 'react-native';
 import MessageBoard from './MessageBoard';
+import BlueButton from './Button';
 
 const CyberpunkPage = ({ route, navigation }) => {
     const { itemId = "", otherField = "" } = route.params || {};
@@ -10,8 +11,18 @@ const CyberpunkPage = ({ route, navigation }) => {
             <View style={styles.main}>
                 <Text style={styles.text}>Cyberpunk Page</Text>
                 <StatusBar style="hidden" />
-                <View style={styles.box}></View>
+                {/*<View style={styles.box}></View>*/}
                 <MessageBoard />
+                <View style={{
+                    // size
+                    width: 100,
+                    // position
+                    left: '10%',
+                    top: "10%",
+                }}>
+                    <BlueButton buttonTitle="Button with dark shadow" buttonFunction={() => { console.log("function of the button triggered") }} />
+                </View>
+
             </View >
         </ScrollView>
 
