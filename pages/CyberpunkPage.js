@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, TextInput, View, ScrollView } from 'react-native';
 import MessageBoard from './MessageBoard';
-import BlueButton from './Button';
+import DarkShadowButton from './DarkShadowButton';
+import LightBorderButton from './LightBorderButton';
 
 const CyberpunkPage = ({ route, navigation }) => {
     const { itemId = "", otherField = "" } = route.params || {};
@@ -20,7 +21,9 @@ const CyberpunkPage = ({ route, navigation }) => {
                     left: '10%',
                     top: "10%",
                 }}>
-                    <BlueButton buttonTitle="Button with dark shadow" buttonFunction={() => { console.log("function of the button triggered") }} />
+                    <DarkShadowButton buttonTitle="Button with dark shadow" buttonFunction={() => { console.log("function of the button triggered") }} />
+                    <br />
+                    <LightBorderButton buttonTitle="Button with Light Border" buttonFunction={() => { console.log("function of the button triggered") }} />
                 </View>
 
             </View >

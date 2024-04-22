@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     },
     border: {
         // background color
-        backgroundColor: 'rgba(0, 240, 255, 0.05)',
+        backgroundColor: '#000000',
 
         // border
         borderWidth: 1,
@@ -54,7 +54,13 @@ const styles = StyleSheet.create({
     // Text heading 
     heading: {
         // color
-        color: '#00f0ff',
+        color: '#C8FFFF',
+
+        // shadow
+        textShadowColor: '#00f0ff',
+        textShadowOffset: { height: 0, width: 0 },
+        textShadowRadius: 2,
+        textShadowOpacity: 1,
 
         // font
         fontFamily: 'Rajdhani',

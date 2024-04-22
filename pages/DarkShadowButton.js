@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const BlueButton = ({ buttonTitle, buttonFunction }) => {
+const DarkShadowButton = ({ buttonTitle, buttonFunction }) => {
     return (
 
         <View style={styles.border}>
@@ -24,10 +24,12 @@ const styles = StyleSheet.create({
 
         // border
         borderWidth: 1,
-        //borderColor: 'rgba(0, 240, 255, 0.05)',
-        borderColor: '#000C0D',
+        borderColor: 'rgba(0, 240, 255, 0.05)',
+        //borderColor: '#000C0D',
+        //borderOpacity: 0.05,   // same as 'rgba(0, 240, 255, 0.05)'
         borderRadius: 5,
 
+        //TODO: Shadow is not available in Android, but is ok in web
         // shadow
         shadowColor: '#00f0ff',
         shadowOffset: { height: 0, width: 0 },
@@ -61,4 +63,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default BlueButton;
+export default DarkShadowButton;
