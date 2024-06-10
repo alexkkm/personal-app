@@ -22,7 +22,6 @@ const CyberpunkPage = ({ route, navigation }) => {
                     top: "10%",
                 }}>
                     <DarkShadowButton buttonTitle="Button with dark shadow" buttonFunction={() => { console.log("function of the button triggered") }} />
-                    <br />
                     <LightBorderButton buttonTitle="Button with Light Border" buttonFunction={() => { console.log("function of the button triggered") }} />
                 </View>
 
