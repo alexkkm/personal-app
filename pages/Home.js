@@ -24,6 +24,10 @@ const HomePage = ({ navigation }) => {
                 title="Cyberpunk Page"
                 onPress={() => navigation.navigate('CyberpunkPage')}
             />
+            <Button
+                title="Design Page"
+                onPress={() => navigation.navigate('DesignPage')}
+            />
             <StatusBar style="auto" />
         </View>
     );
@@ -35,6 +39,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+
+        margin: 5,
     },
 });
 
