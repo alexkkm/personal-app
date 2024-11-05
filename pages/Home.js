@@ -4,20 +4,13 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 const HomePage = ({ navigation }) => {
     return (
         <View style={styles.container}>
-            <Text>Open up App.js to start working on your app!!!!</Text>
+            <Text>Home Page for Tutorial Branch</Text>
             <Button
-                title="Route without params"
-                onPress={() => navigation.navigate('RoutingPage')}
+                title="Basic"
+                onPress={() => navigation.navigate('TutorialPage')}
             />
             <Button
-                title="Route with params"
-                onPress={() => navigation.navigate('RoutingPage', {
-                    itemId: 86,
-                    otherField: "text"
-                })}
-            />
-            <Button
-                title="Auth"
+                title="Firebase Page"
                 onPress={() => navigation.navigate('FirebasePage')}
             />
             <Button

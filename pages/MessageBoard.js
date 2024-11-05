@@ -8,10 +8,14 @@ const MessageBoard = () => {
                 <View style={styles.body}>
                     <Text style={styles.heading}>What's this?</Text>
                     <Text style={styles.paragraph}>
-                        A fake Slack or Discord type of app inspired by Cyberpunk 2077. This app is static, eg. not implementing much logic.
+                        An example paragraph for showing the message board.
                     </Text>
                     <Text style={styles.paragraph}>
-                        The goal is: showcasing a start of a UI kit. If you've played the game, you' might be able to pick-up some similarities with the in-game menus.
+                        The second paragraph.
+                    </Text>
+
+                    <Text style={styles.highlight}>
+                        Highlighted Text
                     </Text>
 
                 </View>
@@ -26,7 +30,7 @@ const styles = StyleSheet.create({
         left: '10%',
         top: "5%",
         // size
-        width: '100%',
+        width: '80%',
     },
     border: {
         // background color
@@ -34,7 +38,7 @@ const styles = StyleSheet.create({
 
         // border
         borderWidth: 1,
-        borderColor: '#c8f0ff',
+        borderColor: '#00f0ff',
         borderRadius: 5,
 
         // shadow
@@ -54,7 +58,7 @@ const styles = StyleSheet.create({
     // Text heading 
     heading: {
         // color
-        color: '#C8FFFF',
+        color: '#00f0ff',
 
         // shadow
         textShadowColor: '#00f0ff',
@@ -70,7 +74,7 @@ const styles = StyleSheet.create({
     // Text paragraph
     paragraph: {
         // color
-        color: '#C8FFFF',
+        color: '#00f0ff',
 
         // shadow
         textShadowColor: '#00f0ff',
@@ -83,6 +87,21 @@ const styles = StyleSheet.create({
         fontSize: 16,
         lineHeight: 22.4,
     },
+    highlight: {
+        // color
+        color: '#C8FFFF',
+
+        // shadow
+        textShadowColor: '#00f0ff',
+        textShadowOffset: { height: 0, width: 0 },
+        textShadowRadius: 2,
+        textShadowOpacity: 1,
+
+        // font
+        fontFamily: 'Rajdhani',
+        fontSize: 16,
+        lineHeight: 22.4,
+    }
 });
 
 export default MessageBoard;

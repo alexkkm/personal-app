@@ -3,13 +3,46 @@ import { useEffect, useState } from 'react';
 
 // firebase package
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth'; // now firebase suugest to import the functions directly form the library, instead of import the object Auth() as oldest version of firebase
-import { collection, getDocs, doc, setDoc, query, where, Timestamp } from "firebase/firestore"
+import { ref, set, get, child, update, remove } from "firebase/database";
 
 // the {auth} is used for the functions from package "firebase/auth"
 import firebaseTools from "../utils/firebase"
 
 // React native package
 import { Button, StyleSheet, Text, View, TextInput } from 'react-native';
+
+// Example of basic operation in firebase realtime database
+const BasicOperation = () => {
+    // Write to Realtime Database
+    const writeData = async (path, content) => {
+        await set(ref(firebaseTools.database, path), content);
+        console.log("Success to write the path:" + path);
+    };
+
+    // Read from Realtime Database with given path
+    const readData = async (path) => {
+        const databaseReference = ref(firebaseTools.database);
+        get(child(databaseReference, path)).then((snapshot) => {
+            if (snapshot.exists()) {
+                console.log(snapshot.val());
+            } else {
+                console.log("No data available");
+            }
+        })
+    };
+
+    // Update data from Realtime Database with given content
+    const updateData = async (path, content) => {
+        await update(ref(firebaseTools.database, path), content);
+        console.log("Successfully updated the path:" + path);
+    }
+
+    // Delete data from Realtime Database with given path
+    const deleteData = async (path) => {
+        await remove(ref(firebaseTools.database, path));
+        console.log("Data from the path:" + (path) + " has been deleted successfully");
+    }
+}
 
 // Component of demonstration of firebase authentication functions
 const AuthenticationArea = ({ navigation }) => {
@@ -94,87 +127,12 @@ const AuthenticationArea = ({ navigation }) => {
     );
 }
 
-// Component of demonstration of firebase fetching functions
-const FetchingArea = () => {
-    // parameter that save the fetching result in string
-    const [string, setString] = useState("")
-    // parameter that save the fetching result in list
-    const [list, setList] = useState([]);
-    // parameter that save the fetching result in list
-    const [result, setResult] = useState({});
-
-
-    // useEffect() will be called just after the "FetchingArea" is rendered
-    useEffect(() => {
-
-        // getDocs(): fetch the data from the firestore collection "tutorial"
-        const fetchInList = getDocs(collection(firebaseTools.firestoreDB, "tutorial")).then((collectionSnapShot) => {
-            const fetching = collectionSnapShot.docs.map((doc) => {
-                return {
-                    id: doc.id,
-                    ...doc.data()
-                }
-            });
-            console.log(fetching);
-            setList(fetching);
-        });
-
-        // create an async function "fetchFromTutorial"
-        const fetchFromTutorial = async () => {
-            /* 
-            excute a query: (Find a collection in firestore called "tutorial", return the documents whose has field "content" in which the value is not empty), 
-            then define the result of the query as "querySnapshot"
-            */
-            const querySnapshot = await getDocs(query(
-                collection(firebaseTools.firestoreDB, "tutorial"),
-                where("content", "!=", "")
-            ));
-            // define a list called "newResult"
-            const newResult = {};
-            // For each element in "querySnapshot", display the element and push it into "newResult"
-            querySnapshot.forEach((doc) => {
-                console.log(doc.id, " => ", doc.data());
-                newResult[doc.id] = doc.data();
-            });
-            // update the "result" with the list "newResult", in which is the documents found in the collection "tutorial"
-            setResult(newResult);
-        };
-        // excute the async function "fectchFromTutorial()"
-        fetchFromTutorial();
-    }, []);
-
-    // styling
-    const styles = StyleSheet.create({
-        container: {
-            backgroundColor: '#fff',
-            alignItems: 'center',
-            justifyContent: 'center',
-        },
-        input: {
-            height: 40,
-            width: 200,
-            margin: 12,
-            borderWidth: 1,
-            padding: 10,
-        },
-    });
-
+const RealTimeDatabaseArea = () => {
     return (
-        <View style={styles.container}>
-            <Text>Fetching Data</Text>
-
-            <Text>Fetch all documents in collection "tutorial"</Text>
-            {list.map((item, id) => (
-                <Text key={id}>{id}: {JSON.stringify(item)}</Text>
-            ))}
-
-            <Text>Documents of "tutorial" collection that exists field: "content"</Text>
-            {Object.keys(result).map((id) => (
-                <Text key={id}>id: {id}, content: {JSON.stringify(result[id])}</Text>
-            ))}
-
+        <View>
+            <Text>RealTime Database Area</Text>
         </View>
-    )
+    );
 }
 
 // Page of tutorials of firebase functions
@@ -182,7 +140,7 @@ const FirebasePage = () => {
     return (
         <View>
             <AuthenticationArea />
-            <FetchingArea />
+            <RealTimeDatabaseArea />
         </View>
     );
 }
