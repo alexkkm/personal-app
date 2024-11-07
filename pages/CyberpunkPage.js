@@ -13,7 +13,7 @@ const CyberpunkPage = ({ route, navigation }) => {
                 <Text style={styles.text}>Cyberpunk Page</Text>
                 <StatusBar style="hidden" />
                 {/*<View style={styles.box}></View>*/}
-                <MessageBoard />
+                <MessageBoard title="Example Heading" textList={["Example of paragraph.", "Another Example of Paragraph, which may occupy for two lines."]} />
                 <View style={{
                     // size
                     width: 100,

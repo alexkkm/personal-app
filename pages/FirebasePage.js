@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 
 // firebase package
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth'; // now firebase suugest to import the functions directly form the library, instead of import the object Auth() as oldest version of firebase
+import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth'; // now firebase suugest to import the functions directly form the library, instead of import the object Auth() as oldest version of firebase
 import { ref, set, get, child, update, remove } from "firebase/database";
 
 // the {auth} is used for the functions from package "firebase/auth"

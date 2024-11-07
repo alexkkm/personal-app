@@ -14,7 +14,7 @@ import TutorialPage from './pages/TutorialPage';
 const Stack = createNativeStackNavigator();
 
 // App component for the entire application
-export default App = () => {
+const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -28,3 +28,5 @@ export default App = () => {
     </NavigationContainer>
   );
 }
+
+export default App;

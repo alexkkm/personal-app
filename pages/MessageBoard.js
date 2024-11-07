@@ -1,23 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const MessageBoard = () => {
+const MessageBoard = (parameters) => {
     return (
         <View style={styles.messageBoard}>
             <View style={styles.border}>
                 <View style={styles.body}>
-                    <Text style={styles.heading}>What's this?</Text>
-                    <Text style={styles.paragraph}>
-                        An example paragraph for showing the message board.
-                    </Text>
-                    <Text style={styles.paragraph}>
-                        The second paragraph.
-                    </Text>
-
-                    <Text style={styles.highlight}>
-                        Highlighted Text
-                    </Text>
-
+                    <Text style={styles.heading}>{parameters.title}</Text>
+                    {parameters.textList.map((text, index) => <Text key={index} style={styles.paragraph}>{text}</Text>)}
                 </View>
             </View>
         </View>
@@ -26,9 +16,6 @@ const MessageBoard = () => {
 
 const styles = StyleSheet.create({
     messageBoard: {
-        // position
-        left: '10%',
-        top: "5%",
         // size
         width: '80%',
     },
@@ -52,8 +39,8 @@ const styles = StyleSheet.create({
     },
     body: {
         // padding
-        padding: 12,
-        paddingBottom: 16,
+        padding: 15,
+        paddingBottom: 15,
     },
     // Text heading 
     heading: {
