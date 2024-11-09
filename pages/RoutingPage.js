@@ -1,7 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const RoutingPage = ({ route, navigation }) => {
+const RoutingPage = ({ route }) => {
+    const navigation = useNavigation();
     const { itemId = "", otherField = "" } = route.params || {};
 
     return (

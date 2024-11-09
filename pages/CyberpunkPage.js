@@ -4,9 +4,7 @@ import MessageBoard from './MessageBoard';
 import DarkShadowButton from './DarkShadowButton';
 import LightBorderButton from './LightBorderButton';
 
-const CyberpunkPage = ({ route, navigation }) => {
-    const { itemId = "", otherField = "" } = route.params || {};
-
+const CyberpunkPage = () => {
     return (
         <ScrollView style={[]}>
             <View style={styles.main}>

@@ -1,7 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const HomePage = ({ navigation }) => {
+const HomePage = () => {
+    const navigation = useNavigation();
     return (
         <View style={styles.container}>
             <Text>Home Page for Tutorial Branch</Text>

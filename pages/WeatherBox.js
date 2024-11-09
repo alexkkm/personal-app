@@ -1,5 +1,6 @@
+import { useNavigation } from "@react-navigation/native";
 import { useState, useEffect } from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View, } from "react-native";
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
 const SunIcon = () => <Icon name="sun" size={30} color="#00f0ff" />;
@@ -98,6 +99,7 @@ const WeatherWidget = (parameters) => {
 			</View>
 
 		</View>
+
 	);
 };
 

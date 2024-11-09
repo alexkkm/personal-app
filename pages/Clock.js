@@ -33,10 +33,7 @@ const ClockWidget = () => {
     });
 
     return (
-        <View className="clockWidget"
-            onClick={() => {
-                console.log("navigate to TimeDetailsPage");
-            }}>
+        <View className="clockWidget">
             <Text style={styles.date} className="date">{date}</Text>
             <Text style={styles.time} className="time">{time}</Text>
         </View>

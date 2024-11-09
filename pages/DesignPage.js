@@ -1,10 +1,16 @@
-import { Button, StyleSheet, Text, TextInput, View, ScrollView } from 'react-native';
+import { Button, StyleSheet, Text, TextInput, View, ScrollView, TouchableOpacity, } from 'react-native';
 import WeatherWidget from './WeatherBox';
 import MessageBoard from './MessageBoard';
 import ClockWidget from './Clock';
+import { useNavigation } from '@react-navigation/native';
 
 
-const DesignPage = ({ route, navigation }) => {
+const DesignPage = ({ route }) => {
+    const navigation = useNavigation();
+
+    const handleWeatherWidgetPress = () => {
+        console.log('Weather Widget Pressed');
+    };
 
     return (
         <ScrollView style={[]}>
@@ -16,7 +22,10 @@ const DesignPage = ({ route, navigation }) => {
                 <Text style={styles.text}>2. Message Board</Text>
                 <MessageBoard title="Example Heading" textList={["Example of paragraph.", "Another Example of Paragraph, which may occupy for two lines."]} />
                 <Text style={styles.text}>3. Weather Widget</Text>
-                <WeatherWidget />
+                {/* Testing for using TouchableOpacity ffor onPress() */}
+                <TouchableOpacity onPress={handleWeatherWidgetPress}>
+                    <WeatherWidget />
+                </TouchableOpacity>
                 <Text style={styles.text}>4. Clock Widget</Text>
                 <ClockWidget />
             </View >

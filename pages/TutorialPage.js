@@ -1,6 +1,8 @@
 import { Button, StyleSheet, Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const TutorialPage = () => {
+    const navigation = useNavigation();
     return (
         <View>
             <Text>Tutorial Page</Text>
