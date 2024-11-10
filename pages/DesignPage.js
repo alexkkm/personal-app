@@ -22,7 +22,7 @@ const DesignPage = ({ route }) => {
                 <Text style={styles.text}>2. Message Board</Text>
                 <MessageBoard title="Example Heading" textList={["Example of paragraph.", "Another Example of Paragraph, which may occupy for two lines."]} />
                 <Text style={styles.text}>3. Weather Widget</Text>
-                {/* Testing for using TouchableOpacity ffor onPress() */}
+                {/* Testing for using TouchableOpacity for onPress() */}
                 <TouchableOpacity onPress={handleWeatherWidgetPress}>
                     <WeatherWidget />
                 </TouchableOpacity>

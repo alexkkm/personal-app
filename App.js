@@ -9,6 +9,7 @@ import FirebasePage from './pages/FirebasePage';
 import CyberpunkPage from './pages/CyberpunkPage';
 import DesignPage from './pages/DesignPage';
 import TutorialPage from './pages/TutorialPage';
+import TestingPage from './pages/TestingPage';
 
 // Create a stack navigator
 const Stack = createNativeStackNavigator();
@@ -24,6 +25,7 @@ const App = () => {
         <Stack.Screen name="FirebasePage" component={FirebasePage} />
         <Stack.Screen name="CyberpunkPage" component={CyberpunkPage} />
         <Stack.Screen name="DesignPage" component={DesignPage} />
+        <Stack.Screen name="TestingPage" component={TestingPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

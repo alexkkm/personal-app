@@ -12,6 +12,10 @@ const HomePage = () => {
                 onPress={() => navigation.navigate('TutorialPage')}
             />
             <Button
+                title="Testing Page"
+                onPress={() => navigation.navigate('TestingPage')}
+            />
+            <Button
                 title="Firebase Page"
                 onPress={() => navigation.navigate('FirebasePage')}
             />
