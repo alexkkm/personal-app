@@ -7,9 +7,9 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import WeatherWidget from "../widgets/Weather";
-import MessageBoard from "../widgets/MessageBoard";
-import ClockWidget from "../widgets/Clock";
+import WeatherWidget from "../../widgets/Weather";
+import MessageBoard from "../../widgets/MessageBoard";
+import ClockWidget from "../../widgets/Clock";
 import { useNavigation } from "@react-navigation/native";
 
 const DesignPage = ({ route }) => {

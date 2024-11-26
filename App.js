@@ -2,14 +2,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // Pages for routing
-import RoutingPage from "./pages/RoutingPage";
-import HomePage from "./pages/Home";
-import FirebasePage from "./pages/FirebasePage";
-import CyberpunkPage from "./pages/CyberpunkPage";
-import DesignPage from "./pages/DesignPage";
-import TutorialPage from "./pages/TutorialPage";
-import TestingPage from "./pages/TestingPage";
 import Desktop from "./pages/Desktop";
+import TestingPage from "./pages/backup/TestingPage";
+import DesignPage from "./pages/backup/DesignPage";
 
 // Create a stack navigator
 const Stack = createNativeStackNavigator();
@@ -19,13 +14,10 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        {/* The first stack will be the default page opened when the app started */}
         <Stack.Screen name="Desktop" component={Desktop} />
-        <Stack.Screen name="TutorialPage" component={TutorialPage} />
-        <Stack.Screen name="RoutingPage" component={RoutingPage} />
-        <Stack.Screen name="FirebasePage" component={FirebasePage} />
-        <Stack.Screen name="CyberpunkPage" component={CyberpunkPage} />
-        <Stack.Screen name="DesignPage" component={DesignPage} />
-        <Stack.Screen name="TestingPage" component={TestingPage} />
+        <Stack.Screen name="Testing" component={TestingPage} />
+        <Stack.Screen name="Design" component={DesignPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

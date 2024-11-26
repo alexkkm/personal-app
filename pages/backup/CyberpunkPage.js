@@ -7,9 +7,9 @@ import {
   View,
   ScrollView,
 } from "react-native";
-import MessageBoard from "../widgets/MessageBoard";
-import DarkShadowButton from "../widgets/DarkShadowButton";
-import LightBorderButton from "../widgets/LightBorderButton";
+import MessageBoard from "../../widgets/MessageBoard";
+import DarkShadowButton from "../../widgets/DarkShadowButton";
+import LightBorderButton from "../../widgets/LightBorderButton";
 
 const CyberpunkPage = () => {
   return (

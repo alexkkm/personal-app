@@ -1,5 +1,5 @@
 import { View, Text } from "react-native";
-import Desktop from "./Desktop";
+import Desktop from "../Desktop";
 
 const TestingPage = () => {
   return (
