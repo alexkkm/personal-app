@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   navigationBarWidget: {
     width: 100,
     height: 40, // Adjust height as needed
-    margin: 5,
+    margin: 2,
     padding: 5,
     display: "flex",
     flexDirection: "row", // Align icon and title in a row

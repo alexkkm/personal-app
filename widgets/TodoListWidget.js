@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255, 255, 255, 0)", // Transparent background
     display: "flex",
     justifyContent: "left",
-    alignItems: "lefts",
+    alignItems: "left",
     cursor: "pointer", // Note: cursor style is not applicable in React Native
   },
   todoText: {
