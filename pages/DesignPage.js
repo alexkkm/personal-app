@@ -7,7 +7,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import WeatherWidget from "../widgets/WeatherBox";
+import WeatherWidget from "../widgets/Weather";
 import MessageBoard from "../widgets/MessageBoard";
 import ClockWidget from "../widgets/Clock";
 import { useNavigation } from "@react-navigation/native";
