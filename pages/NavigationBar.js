@@ -5,6 +5,7 @@ import { RxCross2 } from "react-icons/rx";
 import { MdSettings } from "react-icons/md";
 import { BsBroadcastPin } from "react-icons/bs";
 import { FaBook } from "react-icons/fa";
+import { BsCodeSlash } from "react-icons/bs";
 
 const NavigationBar = ({ switchNavigationBar }) => {
   const navigation = useNavigation();
@@ -17,6 +18,11 @@ const NavigationBar = ({ switchNavigationBar }) => {
       >
         <RxCross2 />
       </TouchableOpacity>
+      <NavigationBarWidget
+        icon={<BsCodeSlash style={{ color: "#00f0ff" }} />}
+        title="Testing"
+        onClick={() => navigation.navigate("Testing")}
+      />
       <NavigationBarWidget
         icon={<MdSettings style={{ color: "#00f0ff" }} />}
         title="setting"
