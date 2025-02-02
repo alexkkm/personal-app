@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const MessageBoard = (parameters) => {
+const MessageBoard = ({ title, textList }) => {
     return (
         <View style={styles.messageBoard}>
             <View style={styles.border}>
                 <View style={styles.body}>
-                    <Text style={styles.heading}>{parameters.title}</Text>
-                    {parameters.textList.map((text, index) => <Text key={index} style={styles.paragraph}>{text}</Text>)}
+                    <Text style={styles.heading}>{title}</Text>
+                    {textList.map((text, index) => <Text key={index} style={styles.paragraph}>{text}</Text>)}
                 </View>
             </View>
         </View>

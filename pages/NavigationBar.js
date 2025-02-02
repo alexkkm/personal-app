@@ -6,6 +6,7 @@ import { MdSettings } from "react-icons/md";
 import { BsBroadcastPin } from "react-icons/bs";
 import { FaBook } from "react-icons/fa";
 import { BsCodeSlash } from "react-icons/bs";
+import { FaPen } from "react-icons/fa";
 
 const NavigationBar = ({ switchNavigationBar }) => {
   const navigation = useNavigation();
@@ -21,7 +22,7 @@ const NavigationBar = ({ switchNavigationBar }) => {
       <NavigationBarWidget
         icon={<BsCodeSlash style={{ color: "#00f0ff" }} />}
         title="Testing"
-        onClick={() => navigation.navigate("Testing")}
+        onClick={() => navigation.navigate("/testing")}
       />
       <NavigationBarWidget
         icon={<MdSettings style={{ color: "#00f0ff" }} />}
@@ -39,6 +40,11 @@ const NavigationBar = ({ switchNavigationBar }) => {
         icon={<FaBook style={{ color: "#00f0ff" }} />}
         title="tutorial"
         onClick={() => navigation.navigate("/tutorial")}
+      />
+      <NavigationBarWidget
+        icon={<FaPen style={{ color: "#00f0ff" }} />}
+        title="design"
+        onClick={() => navigation.navigate("/design")}
       />
     </View>
   );
@@ -80,7 +86,6 @@ const styles = StyleSheet.create({
     cursor: "pointer",
   },
   closeNavigationBarButton: {
-    margin: 5, // Adjust margin to reduce space
     fontSize: 20,
     color: "#00f0ff",
   },

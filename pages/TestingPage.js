@@ -1,10 +1,10 @@
 import { View, Text } from "react-native";
-import Desktop from "./Desktop";
+import MessageBoard from "../widgets/MessageBoard";
 
 const TestingPage = () => {
   return (
-    <View>
-      <Text>TestingPage</Text>
+    <View style={{ backgroundColor: "black", width: "100%", height: "100%" }}>
+      <MessageBoard title="Testing" textList={["Testing"]} />
     </View>
   );
 };

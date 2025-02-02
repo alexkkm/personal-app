@@ -16,10 +16,10 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator>
         {/* The first stack will be the default page opened when the app started */}
-        <Stack.Screen name="Desktop" component={Desktop} />
-        <Stack.Screen name="Testing" component={TestingPage} />
-        <Stack.Screen name="Tutorial" component={TutorialPage} />
-        <Stack.Screen name="Design" component={DesignPage} />
+        <Stack.Screen name="/desktop" component={Desktop} />
+        <Stack.Screen name="/testing" component={TestingPage} />
+        <Stack.Screen name="/tutorial" component={TutorialPage} />
+        <Stack.Screen name="/design" component={DesignPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
