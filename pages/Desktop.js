@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { TfiViewListAlt } from "react-icons/tfi"; // Note: You may need to find a React Native equivalent for icons
-import NavigationBar from "./NavigationBar";
-import WeatherWidget from "../widgets/Weather";
+import NavigationBar from "../widgets/NavigationBar";
+import WeatherWidget from "../widgets/WeatherWidget";
 import ClockWidget from "../widgets/Clock";
 import ScheduleWidget from "../widgets/ScheduleWidget";
 import { useLocation } from "react-router-native"; // Use react-router-native for routing in React Native
@@ -35,42 +35,49 @@ const Desktop = () => {
       <View style={[styles.mainScreen, isBlurred && styles.blurred]}>
         <TouchableOpacity
           onPress={() => switchNavigationBar()}
-          style={[styles.settingButton, {
-            // Enlarge the setting button
-            width: 20,
-            height: 20,
-            // Add a border (DELETE THIS LATER IF NOT NEEDED)
-            borderWidth: 1,
-            borderColor: '#00f0ff',
-            margin: 5,
-          },
+          style={[
+            styles.settingButton,
+            {
+              // Enlarge the setting button
+              width: 20,
+              height: 20,
+              // Add a border (DELETE THIS LATER IF NOT NEEDED)
+              borderWidth: 1,
+              borderColor: "#00f0ff",
+              margin: 5,
+            },
           ]}
-
         >
           <TfiViewListAlt />
         </TouchableOpacity>
-        <View style={{
-          // Add a border (DELETE THIS LATER IF NOT NEEDED)
-          borderWidth: 1,
-          borderColor: '#00f0ff',
-          margin: 5,
-        }}>
+        <View
+          style={{
+            // Add a border (DELETE THIS LATER IF NOT NEEDED)
+            borderWidth: 1,
+            borderColor: "#00f0ff",
+            margin: 5,
+          }}
+        >
           <ClockWidget />
         </View>
-        <View style={{
-          // Add a border (DELETE THIS LATER IF NOT NEEDED)
-          borderWidth: 1,
-          borderColor: '#00f0ff',
-          margin: 5,
-        }}>
+        <View
+          style={{
+            // Add a border (DELETE THIS LATER IF NOT NEEDED)
+            borderWidth: 1,
+            borderColor: "#00f0ff",
+            margin: 5,
+          }}
+        >
           <WeatherWidget />
         </View>
-        <View style={{
-          // Add a border (DELETE THIS LATER IF NOT NEEDED)
-          borderWidth: 1,
-          borderColor: '#00f0ff',
-          margin: 5,
-        }}>
+        <View
+          style={{
+            // Add a border (DELETE THIS LATER IF NOT NEEDED)
+            borderWidth: 1,
+            borderColor: "#00f0ff",
+            margin: 5,
+          }}
+        >
           <ScheduleWidget />
         </View>
       </View>
@@ -94,7 +101,7 @@ const styles = StyleSheet.create({
 
     // Add a border (DELETE THIS LATER IF NOT NEEDED)
     borderWidth: 1,
-    borderColor: '#00f0ff',
+    borderColor: "#00f0ff",
   },
   settingButton: {
     position: "relative",

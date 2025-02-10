@@ -42,20 +42,23 @@ fetch(url, { method: "GET" })
 
 // Widget of displaying weather
 const WeatherWidget = (parameters) => {
+  const navigation = useNavigation();
   // constant
-  const url =
+  const realTimeWeatherURL =
     "https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=rhrread&lang=tc";
 
+  const forecastWeatherURL =
+    "https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=flw&lang=tc";
   // variable
   const [temperature, setTemperature] = useState("");
   const [isRainning, setIsRainning] = useState("false");
   const [isDayTime, setIsDayTime] = useState("false");
 
   // fetch the weather information from HK Observatory
-  async function FetchWeartherInformation(url) {
+  async function FetchRealTimeWeatherInformation(realTimeWeatherURL) {
     try {
-      // fetch the response data from the url using fetch GET
-      const response = await fetch(url, { method: "GET" });
+      // fetch the response data from the realTimeWeatherURL using fetch GET
+      const response = await fetch(realTimeWeatherURL, { method: "GET" });
       if (!response.ok) {
         throw new Error(`HTTP error ${response.status}`);
       }
@@ -87,7 +90,7 @@ const WeatherWidget = (parameters) => {
   };
 
   useEffect(() => {
-    FetchWeartherInformation(url);
+    FetchRealTimeWeatherInformation(realTimeWeatherURL);
     GetCurrentTime();
   });
 
@@ -96,7 +99,7 @@ const WeatherWidget = (parameters) => {
       className="weatherWidget"
       style={styles.weatherWidget}
       onPress={() => {
-        console.log("navigate to weather page");
+        navigation.navigate("/weather");
       }}
     >
       <Text style={styles.temperature}>{temperature}°C</Text>
