@@ -1,5 +1,5 @@
 const forecastWeatherURL =
-  "https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=flw&lang=tc";
+  "https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fnd&lang=tc";
 
 async function FetchForecastWeatherInformation(forecastWeatherURL) {
   try {
@@ -10,8 +10,7 @@ async function FetchForecastWeatherInformation(forecastWeatherURL) {
     }
     // translate the response data into JSON object
     const result = await response.json();
-    const stringS = result.generalSituation;
-    console.log("result:" + stringS);
+    console.log("result:" + JSON.stringify(result));
   } catch (error) {
     console.log("Error:", error.message);
   }
