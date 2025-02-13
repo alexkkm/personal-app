@@ -47,8 +47,6 @@ const WeatherWidget = (parameters) => {
   const realTimeWeatherURL =
     "https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=rhrread&lang=tc";
 
-  const forecastWeatherURL =
-    "https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=flw&lang=tc";
   // variable
   const [temperature, setTemperature] = useState("");
   const [isRainning, setIsRainning] = useState("false");

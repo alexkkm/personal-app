@@ -9,6 +9,7 @@ const WeatherPage = () => {
 
   const [generalSituation, setGeneralSituation] = useState("");
   const [localForecastWeather, setLocalForecastWeather] = useState("");
+  const [localLongForecastWeather, setLocalLongForecastWeather] = useState("");
 
   // 9 days forecast
   const [firstDate, setFirstDate] = useState("");
@@ -50,6 +51,7 @@ const WeatherPage = () => {
 
       setGeneralSituation(result.generalSituation);
       setLocalForecastWeather(result.forecastDesc);
+      setLocalLongForecastWeather(result.outlook);
     } catch (error) {
       console.log("Error:", error.message);
     }
@@ -86,13 +88,17 @@ const WeatherPage = () => {
   });
   return (
     <View style={styles.weatherPage}>
+      {/* Message Board for Today weather */}
       <MessageBoard
         title="Today"
         textList={[
-          "General Situation: " + generalSituation,
-          "Local Forecast Weather: " + localForecastWeather,
+          "概況: " + generalSituation,
+          "預測: " + localForecastWeather,
+          "展望: " + localLongForecastWeather,
         ]}
       />
+
+      {/* Table for 9 days forecast */}
     </View>
   );
 };
