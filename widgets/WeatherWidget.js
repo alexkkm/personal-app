@@ -62,13 +62,13 @@ const WeatherWidget = (parameters) => {
       }
       // translate the response data into JSON object
       const result = await response.json();
-      // obtain the temperature for  "Kuen Tong" from the JSON
-      const localTemperature = result.temperature.data[22].value;
+      // obtain the temperature for  "King's Park" from the JSON
+      const localTemperature = result.temperature.data[0].value;
       setTemperature(localTemperature);
 
-      // obtain the rainfall for "Kuen Tong" from the JSON,
+      // obtain the rainfall for "Yau Tsim Mong" from the JSON,
       // if there is rainfall ,then set the "isRainning" as "rain"
-      result.rainfall.data[17].max > 0
+      result.rainfall.data[13].max > 0
         ? setIsRainning("true")
         : setIsRainning("false");
     } catch (error) {
