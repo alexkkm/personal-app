@@ -20,9 +20,7 @@ const styles = StyleSheet.create({
 
     // border
     borderWidth: 1,
-    borderColor: "#C8FFFF",
-    //borderColor: '#000C0D',
-    //borderOpacity: 0.05,   // same as 'rgba(0, 240, 255, 0.05)'
+    borderColor: "#00f0ff",
     borderRadius: 5,
 
     //TODO: Shadow is not available in Android, but is ok in web
