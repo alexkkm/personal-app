@@ -7,10 +7,11 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import WeatherWidget from "../../widgets/WeatherWidget";
-import MessageBoard from "../../widgets/MessageBoard";
-import ClockWidget from "../../widgets/Clock";
+import WeatherWidget from "../widgets/WeatherWidget";
+import MessageBoard from "../widgets/MessageBoard";
+import ClockWidget from "../widgets/Clock";
 import { useNavigation } from "@react-navigation/native";
+import DarkShadowButton from "../widgets/DarkShadowButton";
 
 const DesignPage = ({ route }) => {
   const navigation = useNavigation();
@@ -43,6 +44,15 @@ const DesignPage = ({ route }) => {
         </TouchableOpacity>
         <Text style={styles.text}>4. Clock Widget</Text>
         <ClockWidget />
+        <Text style={styles.text}>5. Button</Text>
+        <View style={{ width: 200, height: 100 }}>
+          <DarkShadowButton
+            buttonTitle="Button"
+            buttonFunction={() => {
+              console.log("Button clicked");
+            }}
+          />
+        </View>
       </View>
     </ScrollView>
   );

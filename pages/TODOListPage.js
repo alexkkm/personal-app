@@ -6,22 +6,21 @@ import {
   FlatList,
   TextInput,
   TouchableOpacity,
-  Modal,
-  Button,
 } from "react-native";
 import Draggable from "react-native-draggable";
 import DarkShadowButton from "../widgets/DarkShadowButton";
+import MessageBoard from "../widgets/MessageBoard"; // Adjust the import path as necessary
 
 const TODOListPage = () => {
   const [todos, setTodos] = useState([]);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [isAddingTodo, setIsAddingTodo] = useState(false);
   const [newTodo, setNewTodo] = useState({ title: "", dueDate: "" });
 
   const addTodo = () => {
     if (newTodo.title) {
       setTodos([...todos, { id: Date.now(), ...newTodo, done: false }]);
       setNewTodo({ title: "", dueDate: "" });
-      setModalVisible(false);
+      setIsAddingTodo(false);
     }
   };
 
@@ -41,7 +40,7 @@ const TODOListPage = () => {
     <Draggable
       x={0}
       y={0}
-      renderColor={item.done ? "lightgray" : "white"}
+      renderColor={"#000000"}
       style={styles.draggable}
     >
       <View style={styles.todoItem}>
@@ -60,36 +59,48 @@ const TODOListPage = () => {
 
   return (
     <View style={styles.container}>
-      <DarkShadowButton
-        buttonTitle="Add TODO"
-        buttonFunction={() => setModalVisible(true)}
-      />
+      <View style={[isAddingTodo && styles.blurred]}>
+        <DarkShadowButton
+          buttonTitle="Add TODO"
+          buttonFunction={() => setIsAddingTodo(true)}
+        />
+      </View>
 
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <View style={styles.modalView}>
-          <TextInput
-            style={styles.input}
-            placeholder="Title"
-            value={newTodo.title}
-            onChangeText={(text) => setNewTodo({ ...newTodo, title: text })}
+      {isAddingTodo && (
+        <View style={[styles.overlay]}>
+          <MessageBoard
+            title="Add TODO"
+            textList={[
+              <TextInput
+                style={styles.input}
+                placeholder="Title"
+                value={newTodo.title}
+                onChangeText={(text) => setNewTodo({ ...newTodo, title: text })}
+              />,
+              <TextInput
+                style={styles.input}
+                placeholder="Due Date"
+                value={newTodo.dueDate}
+                onChangeText={(text) =>
+                  setNewTodo({ ...newTodo, dueDate: text })
+                }
+              />,
+              <TouchableOpacity style={styles.addButton} onPress={addTodo}>
+                <Text style={styles.addButtonText}>Add</Text>
+              </TouchableOpacity>,
+              <TouchableOpacity
+                style={styles.cancelButton}
+                onPress={() => setIsAddingTodo(false)}
+              >
+                <Text style={styles.cancelButtonText}>Cancel</Text>
+              </TouchableOpacity>,
+            ]}
           />
-          <TextInput
-            style={styles.input}
-            placeholder="Due Date"
-            value={newTodo.dueDate}
-            onChangeText={(text) => setNewTodo({ ...newTodo, dueDate: text })}
-          />
-          <Button title="Add" onPress={addTodo} />
-          <Button title="Cancel" onPress={() => setModalVisible(false)} />
         </View>
-      </Modal>
+      )}
 
       <FlatList
+        style={[isAddingTodo && styles.blurred]}
         data={todos}
         keyExtractor={(item) => item.id.toString()}
         renderItem={renderItem}
@@ -106,7 +117,7 @@ const styles = StyleSheet.create({
   },
   todoItem: {
     backgroundColor: "#000000",
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: "#00f0ff",
     borderRadius: 5,
     padding: 10,
@@ -132,17 +143,20 @@ const styles = StyleSheet.create({
     color: "red",
     marginTop: 5,
   },
-  modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
+  overlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent background
+    justifyContent: "center",
     alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+    zIndex: 1,
+  },
+  blurred: {
+    filter: "blur(2px)",
+    pointerEvents: "none",
   },
   input: {
     height: 40,
@@ -151,6 +165,27 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     width: "80%",
     padding: 10,
+    backgroundColor: "white",
+  },
+  addButton: {
+    marginVertical: 5,
+    backgroundColor: "#00f0ff",
+    borderRadius: 5,
+    padding: 10,
+  },
+  addButtonText: {
+    textAlign: "center",
+    color: "#000000",
+  },
+  cancelButton: {
+    marginVertical: 5,
+    backgroundColor: "red",
+    borderRadius: 5,
+    padding: 10,
+  },
+  cancelButtonText: {
+    textAlign: "center",
+    color: "#ffffff",
   },
   draggable: {
     zIndex: 1,

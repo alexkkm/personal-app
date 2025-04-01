@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // Pages for routing
 import Desktop from "./pages/Desktop";
-import DesignPage from "./pages/backup/DesignPage";
+import DesignPage from "./pages/DesignPage";
 import TestingPage from "./pages/TestingPage";
 import TutorialPage from "./pages/TutorialPage";
 import WeatherPage from "./pages/WeatherPage";
