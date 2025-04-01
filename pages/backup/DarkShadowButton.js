@@ -20,7 +20,9 @@ const styles = StyleSheet.create({
 
     // border
     borderWidth: 1,
-    borderColor: "#00f0ff",
+    borderColor: "#C8FFFF",
+    //borderColor: '#000C0D',
+    //borderOpacity: 0.05,   // same as 'rgba(0, 240, 255, 0.05)'
     borderRadius: 5,
 
     //TODO: Shadow is not available in Android, but is ok in web
@@ -58,3 +60,7 @@ const styles = StyleSheet.create({
 });
 
 export default DarkShadowButton;
+
+/*
+
+*/

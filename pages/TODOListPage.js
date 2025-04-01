@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Draggable from "react-native-draggable";
-import DarkShadowButton from "../widgets/DarkShadowButton";
+import StyledButton from "../widgets/StyledButton";
 import MessageBoard from "../widgets/MessageBoard"; // Adjust the import path as necessary
 
 const TODOListPage = () => {
@@ -37,12 +37,7 @@ const TODOListPage = () => {
   };
 
   const renderItem = ({ item }) => (
-    <Draggable
-      x={0}
-      y={0}
-      renderColor={"#000000"}
-      style={styles.draggable}
-    >
+    <Draggable x={0} y={0} renderColor={"#000000"} style={styles.draggable}>
       <View style={styles.todoItem}>
         <TouchableOpacity onPress={() => toggleTodo(item.id)}>
           <Text style={[styles.todoTitle, item.done && styles.done]}>
@@ -60,7 +55,7 @@ const TODOListPage = () => {
   return (
     <View style={styles.container}>
       <View style={[isAddingTodo && styles.blurred]}>
-        <DarkShadowButton
+        <StyledButton
           buttonTitle="Add TODO"
           buttonFunction={() => setIsAddingTodo(true)}
         />
