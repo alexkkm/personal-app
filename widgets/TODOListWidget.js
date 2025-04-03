@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const TODOListWidget = () => {
   const [time, setTime] = useState("");
@@ -9,12 +10,13 @@ const TODOListWidget = () => {
     // You can implement time and date logic here if needed
   }, []);
 
-  
+  const navigation = useNavigation();
+
   return (
     <TouchableOpacity
       style={styles.TODOListWidget}
       onPress={() => {
-        navigation.navigate("/weather");
+        navigation.navigate("/todolist");
       }}
     >
       <Text style={styles.todoText}>Todo</Text>

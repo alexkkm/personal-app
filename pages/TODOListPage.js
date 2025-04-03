@@ -107,7 +107,7 @@ const TODOListPage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "rgba(0, 240, 255, 0.05)",
+    backgroundColor: "black",
     padding: 10,
   },
   todoItem: {

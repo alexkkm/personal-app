@@ -5,6 +5,7 @@ import NavigationBar from "../widgets/NavigationBar";
 import WeatherWidget from "../widgets/WeatherWidget";
 import ClockWidget from "../widgets/Clock";
 import ScheduleWidget from "../widgets/ScheduleWidget";
+import TODOListWidget from "../widgets/TODOListWidget";
 import { useLocation } from "react-router-native"; // Use react-router-native for routing in React Native
 
 const PathNameIndicator = () => {
@@ -79,6 +80,16 @@ const Desktop = () => {
           }}
         >
           <ScheduleWidget />
+        </View>
+        <View
+          style={{
+            // Add a border (DELETE THIS LATER IF NOT NEEDED)
+            borderWidth: 1,
+            borderColor: "#00f0ff",
+            margin: 5,
+          }}
+        >
+          <TODOListWidget />
         </View>
       </View>
     </View>
