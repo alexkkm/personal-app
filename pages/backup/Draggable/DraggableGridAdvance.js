@@ -4,17 +4,7 @@ import { SafeAreaProvider, useSafeArea } from "react-native-safe-area-context";
 import GridView from "react-native-draggable-gridview";
 import _ from "lodash";
 
-const TestingPage = () => {
-  return (
-    <View style={{ backgroundColor: "black", width: "100%", height: "100%" }}>
-      <Container />
-    </View>
-  );
-};
-
-export default TestingPage;
-
-const Container = memo(() => {
+const AdvancedDraggableGrid = memo(() => {
   const { top, bottom } = useSafeArea();
   const [editing, setEditing] = useState(false);
   const [data, setData] = useState(
@@ -213,3 +203,5 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
 });
+
+export default AdvancedDraggableGrid;
