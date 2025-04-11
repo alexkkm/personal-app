@@ -4,61 +4,46 @@ import { SafeAreaProvider, useSafeArea } from "react-native-safe-area-context";
 import GridView from "react-native-draggable-gridview";
 import _ from "lodash";
 
-const TestingPage = () => {
-  return (
-    <View style={{ backgroundColor: "black", width: "100%", height: "100%" }}>
-      <Container />
-    </View>
-  );
-};
-
-export default TestingPage;
-
-const Container = memo(() => {
+const TestingGrid = memo(() => {
   const { top, bottom } = useSafeArea();
-
-  // the state of editing
   const [editing, setEditing] = useState(false);
-  //存儲網格中的項目數據，初始為 14 個項目。
   const [data, setData] = useState(
-    Array.from(new Array(14)).map((value, i) => newData(i))
+    Array.from(new Array(14)).map((v, i) => newData(i))
   );
 
-  //判斷某個項目是否為固定項目（即 "+" 按鈕）。
+  const onPressEdit = useCallback(() => {
+    setEditing(!editing);
+  }, [editing]);
+
   const locked = useCallback((item) => item === "+", []);
-  //渲染固定的 "+" 按鈕，用於新增項目。
+
   const renderLockedItem = useCallback(
     () => <LockedItem editing={editing} onPress={onPressAdd} />,
     [editing, data]
   );
-  //渲染普通的網格項目。
+
   const renderItem = useCallback(
     (item) => (
       <Item item={item} editing={editing} onPressDelete={onPressDelete} />
     ),
     [editing, data]
   );
-  //切換編輯模式。
-  const onPressEdit = useCallback(() => {
-    setEditing(!editing);
-  }, [editing]);
 
-  //開始拖拽時，自動進入編輯模式。
   const onBeginDragging = useCallback(
     () => !editing && setEditing(true),
     [editing]
   );
-  //點擊非編輯模式下的項目時，顯示其顏色。
+
   const onPressCell = useCallback(
     (item) => !editing && alert(item.color),
     [editing]
   );
-  //在網格中新增一個項目。
+
   const onPressAdd = useCallback(
     () => !editing && setData([newData(data.length + 1), ...data]),
     [editing, data]
   );
-  // 拖拽結束後更新數據
+
   const onReleaseCell = useCallback(
     (items) => {
       const data1 = items.slice(1);
@@ -66,7 +51,7 @@ const Container = memo(() => {
     },
     [data]
   );
-  // 刪除指定的項目。
+
   const onPressDelete = useCallback(
     (item) => setData(data.filter((v) => v.id !== item.id)),
     [data]
@@ -75,14 +60,14 @@ const Container = memo(() => {
   return (
     <View style={{ flex: 1 }}>
       <GridView
-        data={["+", ...data]} //存儲網格中的項目數據，初始為 14 個項目。
+        data={["+", ...data]}
         keyExtractor={(item) => (item === "+" ? item : item.id)}
-        renderItem={renderItem} //渲染普通的網格項目。
-        renderLockedItem={renderLockedItem} //渲染固定的項目: "+"按鈕，用於新增項目。
-        locked={locked} //判斷某個項目是否為固定項目: （即 "+" 按鈕）。
-        onBeginDragging={onBeginDragging} //開始拖拽時: 自動進入編輯模式。
-        onPressCell={onPressCell} //點擊非編輯模式下的項目時: 顯示其顏色。
-        onReleaseCell={onReleaseCell} //拖拽結束後:更新數據。
+        renderItem={renderItem}
+        renderLockedItem={renderLockedItem}
+        locked={locked}
+        onBeginDragging={onBeginDragging}
+        onPressCell={onPressCell}
+        onReleaseCell={onReleaseCell}
         numColumns={3}
         delayLongPress={editing ? 50 : 500}
         containerMargin={{ top: 60 + top, bottom, left: 2, right: 2 }}
@@ -97,7 +82,6 @@ const Container = memo(() => {
  */
 const colors = ["red", "orange", "green", "cyan", "blue", "purple", "pink"];
 
-// create a new data;{id,color}
 const newData = (i) => ({
   id: uuid(),
   color: colors[i % colors.length],
@@ -105,9 +89,7 @@ const newData = (i) => ({
 
 /**
  * Item
-// 渲染網格中的普通項目，顯示顏色和刪除按鈕（僅在編輯模式下顯示）。
-*/
-
+ */
 const Item = memo(({ item, editing, onPressDelete }) => {
   return (
     <View style={[styles.item, { backgroundColor: item.color || "gray" }]}>
@@ -127,7 +109,6 @@ const DeleteButton = memo(({ onPress }) => (
 
 /**
  * LockedItem
-// 渲染固定的 "+" 按鈕，用於新增項目。
  */
 const LockedItem = memo(({ editing, onPress }) => (
   <TouchableOpacity
@@ -143,7 +124,6 @@ const LockedItem = memo(({ editing, onPress }) => (
 
 /**
  * Header
- // 渲染頁面的標題和編輯模式切換按鈕。
  */
 const Header = memo(({ top, editing, onPress }) => (
   <View style={[styles.header, { height: 60 + top }]}>
@@ -223,3 +203,5 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
 });
+
+export default TestingGrid;
