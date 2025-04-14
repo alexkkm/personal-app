@@ -1,225 +1,68 @@
-import React, { memo, useState, useCallback } from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import { SafeAreaProvider, useSafeArea } from "react-native-safe-area-context";
-import GridView from "react-native-draggable-gridview";
-import _ from "lodash";
+import React, { useState } from "react";
+import { View, Text, StyleSheet } from "react-native";
+import { DraggableGrid } from "react-native-draggable-grid";
+import WeatherWidget from "../widgets/WeatherWidget";
+import ClockWidget from "../widgets/Clock";
+import ScheduleWidget from "../widgets/ScheduleWidget";
 
 const TestingPage = () => {
-  return (
-    <View style={{ backgroundColor: "black", width: "100%", height: "100%" }}>
-      <Container />
+  const [data, setData] = useState([
+    { key: "add", name: "Add", component: <AddWidget /> },
+    { key: "clock", name: "Clock", component: <ClockWidget /> },
+    { key: "weather", name: "Weather", component: <WeatherWidget /> },
+    { key: "schedule", name: "Schedule", component: <ScheduleWidget /> },
+  ]);
+
+  const renderItem = (item) => (
+    <View style={styles.item}>
+      <Text>{item.name}</Text>
+      {item.component}
     </View>
   );
-};
-
-export default TestingPage;
-
-const Container = memo(() => {
-  const { top, bottom } = useSafeArea();
-
-  // the state of editing
-  const [editing, setEditing] = useState(false);
-  //存儲網格中的項目數據，初始為 14 個項目。
-  const [data, setData] = useState(
-    Array.from(new Array(14)).map((value, i) => newData(i))
-  );
-
-  //判斷某個項目是否為固定項目（即 "+" 按鈕）。
-  const locked = useCallback((item) => item === "+", []);
-  //渲染固定的 "+" 按鈕，用於新增項目。
-  const renderLockedItem = useCallback(
-    () => <LockedItem editing={editing} onPress={onPressAdd} />,
-    [editing, data]
-  );
-  //渲染普通的網格項目。
-  const renderItem = useCallback(
-    (item) => (
-      <Item item={item} editing={editing} onPressDelete={onPressDelete} />
-    ),
-    [editing, data]
-  );
-  //切換編輯模式。
-  const onPressEdit = useCallback(() => {
-    setEditing(!editing);
-  }, [editing]);
-
-  //開始拖拽時，自動進入編輯模式。
-  const onBeginDragging = useCallback(
-    () => !editing && setEditing(true),
-    [editing]
-  );
-  //點擊非編輯模式下的項目時，顯示其顏色。
-  const onPressCell = useCallback(
-    (item) => !editing && alert(item.color),
-    [editing]
-  );
-  //在網格中新增一個項目。
-  const onPressAdd = useCallback(
-    () => !editing && setData([newData(data.length + 1), ...data]),
-    [editing, data]
-  );
-  // 拖拽結束後更新數據
-  const onReleaseCell = useCallback(
-    (items) => {
-      const data1 = items.slice(1);
-      if (!_.isEqual(data, data1)) setData(data1);
-    },
-    [data]
-  );
-  // 刪除指定的項目。
-  const onPressDelete = useCallback(
-    (item) => setData(data.filter((v) => v.id !== item.id)),
-    [data]
-  );
 
   return (
-    <View style={{ flex: 1 }}>
-      <GridView
-        data={["+", ...data]} //存儲網格中的項目數據，初始為 14 個項目。
-        keyExtractor={(item) => (item === "+" ? item : item.id)}
-        renderItem={renderItem} //渲染普通的網格項目。
-        renderLockedItem={renderLockedItem} //渲染固定的項目: "+"按鈕，用於新增項目。
-        locked={locked} //判斷某個項目是否為固定項目: （即 "+" 按鈕）。
-        onBeginDragging={onBeginDragging} //開始拖拽時: 自動進入編輯模式。
-        onPressCell={onPressCell} //點擊非編輯模式下的項目時: 顯示其顏色。
-        onReleaseCell={onReleaseCell} //拖拽結束後:更新數據。
-        numColumns={3}
-        delayLongPress={editing ? 50 : 500}
-        containerMargin={{ top: 60 + top, bottom, left: 2, right: 2 }}
+    <View style={styles.container}>
+      <DraggableGrid
+        data={data}
+        renderItem={renderItem}
+        numColumns={2}
+        onDragRelease={(newData) => setData(newData)}
+        itemHeight={200}
       />
-      <Header top={top} editing={editing} onPress={onPressEdit} />
     </View>
   );
-});
-
-/**
- * Data
- */
-const colors = ["red", "orange", "green", "cyan", "blue", "purple", "pink"];
-
-// create a new data;{id,color}
-const newData = (i) => ({
-  id: uuid(),
-  color: colors[i % colors.length],
-});
-
-/**
- * Item
-// 渲染網格中的普通項目，顯示顏色和刪除按鈕（僅在編輯模式下顯示）。
-*/
-
-const Item = memo(({ item, editing, onPressDelete }) => {
-  return (
-    <View style={[styles.item, { backgroundColor: item.color || "gray" }]}>
-      <Text style={{ color: "#fff", fontSize: 18 }}>{item.color}</Text>
-      {editing && <DeleteButton onPress={() => onPressDelete(item)} />}
-    </View>
-  );
-});
-
-const DeleteButton = memo(({ onPress }) => (
-  <TouchableOpacity style={styles.delete} onPress={onPress}>
-    <View style={styles.deleteContainer}>
-      <Text style={{ color: "#fff" }}>x</Text>
-    </View>
-  </TouchableOpacity>
-));
-
-/**
- * LockedItem
-// 渲染固定的 "+" 按鈕，用於新增項目。
- */
-const LockedItem = memo(({ editing, onPress }) => (
-  <TouchableOpacity
-    style={{ flex: 1 }}
-    activeOpacity={editing ? 1 : 0.5}
-    onPress={onPress}
-  >
-    <View style={[styles.item, { opacity: editing ? 0.25 : 1 }]}>
-      <Text style={{ fontSize: 48 }}>+</Text>
-    </View>
-  </TouchableOpacity>
-));
-
-/**
- * Header
- // 渲染頁面的標題和編輯模式切換按鈕。
- */
-const Header = memo(({ top, editing, onPress }) => (
-  <View style={[styles.header, { height: 60 + top }]}>
-    <View style={styles.headerContainer}>
-      <Text style={styles.headerTitle}>GRID</Text>
-      <TouchableOpacity onPress={onPress}>
-        <Text style={styles.headerItem}>{editing ? "DONE" : "EDIT"}</Text>
-      </TouchableOpacity>
-    </View>
-  </View>
-));
-
-/**
- * UUID
- */
-const uuid = () => {
-  let chars = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".split("");
-  for (let i = 0, len = chars.length; i < len; i++) {
-    switch (chars[i]) {
-      case "x":
-        chars[i] = Math.floor(Math.random() * 16).toString(16);
-        break;
-      case "y":
-        chars[i] = (Math.floor(Math.random() * 4) + 8).toString(16);
-        break;
-    }
-  }
-  return chars.join("");
 };
 
-/**
- * Style
- */
+const AddWidget = () => (
+  <View style={styles.addWidget}>
+    <Text style={{ color: "#00f0ff", fontSize: 48 }}>+</Text>
+  </View>
+);
+
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#000",
+    padding: 10,
+  },
   item: {
     flex: 1,
-    margin: 1,
+    padding: 10,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "transparent",
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#00f0ff",
+    margin: 5,
   },
-  delete: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: 32,
-    height: 32,
+  addWidget: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
-  },
-  deleteContainer: {
-    width: 20,
-    height: 20,
-    borderRadius: 12,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#0009",
-  },
-  header: {
-    position: "absolute",
-    width: "100%",
-    backgroundColor: "#fffe",
-    justifyContent: "flex-end",
-  },
-  headerTitle: {
-    position: "absolute",
-    width: "100%",
-    textAlign: "center",
-    fontSize: 18,
-    fontWeight: "500",
-  },
-  headerItem: { fontSize: 18, color: "gray" },
-  headerContainer: {
-    height: 60,
-    paddingHorizontal: 15,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-end",
+    backgroundColor: "transparent",
+    borderRadius: 8,
   },
 });
+
+export default TestingPage;
