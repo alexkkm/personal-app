@@ -31,13 +31,12 @@ const Desktop = () => {
 
   return (
     <View style={styles.desktop}>
-      <View style={styles.hiddenArea}>
-        {isBlurred && (
-          <View style={styles.switchNavigationBarButton}>
-            <NavigationBar switchNavigationBar={switchNavigationBar} />
-          </View>
-        )}
-      </View>
+      {/* Navigation Bar is moved outside of the blurred mainScreen */}
+      {isBlurred && (
+        <View style={styles.navigationBarContainer}>
+          <NavigationBar switchNavigationBar={switchNavigationBar} />
+        </View>
+      )}
 
       <View style={[styles.mainScreen, isBlurred && styles.blurred]}>
         <TouchableOpacity
@@ -125,10 +124,18 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#00f0ff",
   },
+  navigationBarContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 10, // Ensure it appears above the blurred mainScreen
+  },
   switchNavigationBarButton: {
     transition: "filter 0.3s ease-in-out",
   },
   mainScreen: {
+    flex: 1,
     transition: "filter 0.3s ease-in-out",
   },
   blurred: {

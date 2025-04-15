@@ -1,67 +1,97 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { DraggableGrid } from "react-native-draggable-grid";
-import WeatherWidget from "../widgets/WeatherWidget";
-import ClockWidget from "../widgets/Clock";
-import ScheduleWidget from "../widgets/ScheduleWidget";
+import React, { useState, useEffect } from "react";
+import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const TestingPage = () => {
-  const [data, setData] = useState([
-    { key: "add", name: "Add", component: <AddWidget /> },
-    { key: "clock", name: "Clock", component: <ClockWidget /> },
-    { key: "weather", name: "Weather", component: <WeatherWidget /> },
-    { key: "schedule", name: "Schedule", component: <ScheduleWidget /> },
-  ]);
+  return <LocalStorageExample />;
+};
 
-  const renderItem = (item) => (
-    <View style={styles.item}>
-      <Text>{item.name}</Text>
-      {item.component}
-    </View>
-  );
+const LocalStorageExample = () => {
+  const [inputValue, setInputValue] = useState("");
+  const [storedValue, setStoredValue] = useState("");
+
+  // Load stored value when the component mounts
+  useEffect(() => {
+    const loadStoredValue = async () => {
+      try {
+        const value = await AsyncStorage.getItem("myKey");
+        if (value !== null) {
+          setStoredValue(value);
+        }
+      } catch (error) {
+        console.error("Error loading stored value:", error);
+      }
+    };
+
+    loadStoredValue();
+  }, []);
+
+  // Save value to local storage
+  const saveValue = async () => {
+    try {
+      await AsyncStorage.setItem("myKey", inputValue);
+      setStoredValue(inputValue);
+      setInputValue(""); // Clear the input field
+    } catch (error) {
+      console.error("Error saving value:", error);
+    }
+  };
+
+  // Clear value from local storage
+  const clearValue = async () => {
+    try {
+      await AsyncStorage.removeItem("myKey");
+      setStoredValue("");
+    } catch (error) {
+      console.error("Error clearing value:", error);
+    }
+  };
 
   return (
     <View style={styles.container}>
-      <DraggableGrid
-        data={data}
-        renderItem={renderItem}
-        numColumns={2}
-        onDragRelease={(newData) => setData(newData)}
-        itemHeight={200}
+      <Text style={styles.title}>Local Storage Example</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Enter a value"
+        value={inputValue}
+        onChangeText={setInputValue}
       />
+      <Button title="Save Value" onPress={saveValue} />
+      <Button title="Clear Value" onPress={clearValue} color="red" />
+      <Text style={styles.storedValue}>
+        Stored Value: {storedValue || "None"}
+      </Text>
     </View>
   );
 };
 
-const AddWidget = () => (
-  <View style={styles.addWidget}>
-    <Text style={{ color: "#00f0ff", fontSize: 48 }}>+</Text>
-  </View>
-);
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#000",
-    padding: 10,
-  },
-  item: {
-    flex: 1,
-    padding: 10,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "transparent",
-    borderRadius: 8,
+    backgroundColor: "#000",
+    padding: 20,
+  },
+  title: {
+    fontSize: 24,
+    color: "#00f0ff",
+    marginBottom: 20,
+  },
+  input: {
+    width: "100%",
+    padding: 10,
     borderWidth: 1,
     borderColor: "#00f0ff",
-    margin: 5,
+    borderRadius: 5,
+    marginBottom: 20,
+    color: "#fff",
+    backgroundColor: "#333",
   },
-  addWidget: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "transparent",
-    borderRadius: 8,
+  storedValue: {
+    marginTop: 20,
+    fontSize: 18,
+    color: "#00f0ff",
   },
 });
 
