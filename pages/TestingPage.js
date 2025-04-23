@@ -37,13 +37,23 @@ const LocalStorageExample = () => {
     }
   };
 
-  // Clear value from local storage
-  const clearValue = async () => {
+  // remove value from local storage
+  const removeValue = async () => {
     try {
       await AsyncStorage.removeItem("myKey");
       setStoredValue("");
     } catch (error) {
       console.error("Error clearing value:", error);
+    }
+  };
+
+  // Clear whole AsyncStorage data from all client and libraries
+  const clearAsyncStorage = async () => {
+    try {
+      await AsyncStorage.clear();
+      setStoredValue("");
+    } catch (error) {
+      console.error("Error on clearAsyncStorage:", error);
     }
   };
 
@@ -57,7 +67,14 @@ const LocalStorageExample = () => {
         onChangeText={setInputValue}
       />
       <Button title="Save Value" onPress={saveValue} />
-      <Button title="Clear Value" onPress={clearValue} color="red" />
+      <br />
+      <Button title="Remove Value" onPress={removeValue} color="red" />
+      <br />
+      <Button
+        title="Clear All Memory"
+        onPress={clearAsyncStorage}
+        color="red"
+      />
       <Text style={styles.storedValue}>
         Stored Value: {storedValue || "None"}
       </Text>
@@ -79,7 +96,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   input: {
-    width: "100%",
+    width: "30%",
     padding: 10,
     borderWidth: 1,
     borderColor: "#00f0ff",
