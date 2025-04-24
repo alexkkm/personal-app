@@ -1,114 +1,109 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Button, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const TestingPage = () => {
-  return <LocalStorageExample />;
+  return <NestedTable />;
 };
 
-const LocalStorageExample = () => {
-  const [inputValue, setInputValue] = useState("");
-  const [storedValue, setStoredValue] = useState("");
+const NestedTable = () => {
+  const [data, setData] = useState({});
 
-  // Load stored value when the component mounts
-  useEffect(() => {
-    const loadStoredValue = async () => {
-      try {
-        const value = await AsyncStorage.getItem("myKey");
-        if (value !== null) {
-          setStoredValue(value);
-        }
-      } catch (error) {
-        console.error("Error loading stored value:", error);
+  // Fetch all keys and their values from AsyncStorage
+  const fetchDataFromAsyncStorage = async () => {
+    try {
+      const keys = await AsyncStorage.getAllKeys();
+      const result = {};
+      for (const key of keys) {
+        const value = await AsyncStorage.getItem(key);
+        result[key] = JSON.parse(value) || value; // Parse JSON if possible
       }
-    };
+      setData(result);
+    } catch (error) {
+      console.error("Error fetching data from AsyncStorage:", error);
+    }
+  };
 
-    loadStoredValue();
+  useEffect(() => {
+    fetchDataFromAsyncStorage();
   }, []);
 
-  // Save value to local storage
-  const saveValue = async () => {
-    try {
-      await AsyncStorage.setItem("myKey", inputValue);
-      setStoredValue(inputValue);
-      setInputValue(""); // Clear the input field
-    } catch (error) {
-      console.error("Error saving value:", error);
-    }
-  };
+  // Recursive function to render nested JSON as a table
+  const renderTable = (obj, parentKey = "") => {
+    return Object.entries(obj).map(([key, value]) => {
+      const currentPath = parentKey ? `${parentKey}.${key}` : key;
 
-  // remove value from local storage
-  const removeValue = async () => {
-    try {
-      await AsyncStorage.removeItem("myKey");
-      setStoredValue("");
-    } catch (error) {
-      console.error("Error clearing value:", error);
-    }
-  };
-
-  // Clear whole AsyncStorage data from all client and libraries
-  const clearAsyncStorage = async () => {
-    try {
-      await AsyncStorage.clear();
-      setStoredValue("");
-    } catch (error) {
-      console.error("Error on clearAsyncStorage:", error);
-    }
+      return (
+        <View key={currentPath} style={styles.row}>
+          <Text style={styles.keyColumn}>{key}</Text>
+          {typeof value === "object" && value !== null ? (
+            <View style={styles.nestedContainer}>
+              {renderTable(value, currentPath)}
+            </View>
+          ) : (
+            <Text style={styles.valueColumn}>{String(value)}</Text>
+          )}
+        </View>
+      );
+    });
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Local Storage Example</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter a value"
-        value={inputValue}
-        onChangeText={setInputValue}
-      />
-      <Button title="Save Value" onPress={saveValue} />
-      <br />
-      <Button title="Remove Value" onPress={removeValue} color="red" />
-      <br />
-      <Button
-        title="Clear All Memory"
-        onPress={clearAsyncStorage}
-        color="red"
-      />
-      <Text style={styles.storedValue}>
-        Stored Value: {storedValue || "None"}
-      </Text>
-    </View>
+    <ScrollView style={styles.container}>
+      <Text style={styles.title}>Nested Table for AsyncStorage</Text>
+      {Object.keys(data).length === 0 ? (
+        <Text style={styles.noDataText}>No data available in AsyncStorage</Text>
+      ) : (
+        <View style={styles.table}>{renderTable(data)}</View>
+      )}
+      <Button title="Refresh Data" onPress={fetchDataFromAsyncStorage} />
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "#000",
-    padding: 20,
+    padding: 10,
   },
   title: {
-    fontSize: 24,
+    fontSize: 20,
     color: "#00f0ff",
+    textAlign: "center",
     marginBottom: 20,
   },
-  input: {
-    width: "30%",
-    padding: 10,
+  noDataText: {
+    color: "#fff",
+    textAlign: "center",
+    marginVertical: 20,
+  },
+  table: {
     borderWidth: 1,
     borderColor: "#00f0ff",
     borderRadius: 5,
-    marginBottom: 20,
-    color: "#fff",
-    backgroundColor: "#333",
+    padding: 10,
   },
-  storedValue: {
-    marginTop: 20,
-    fontSize: 18,
-    color: "#00f0ff",
+  row: {
+    flexDirection: "row",
+    borderBottomWidth: 1,
+    borderBottomColor: "#00f0ff",
+    paddingVertical: 5,
+  },
+  keyColumn: {
+    flex: 1,
+    color: "#fff",
+    fontWeight: "bold",
+  },
+  valueColumn: {
+    flex: 2,
+    color: "#fff",
+  },
+  nestedContainer: {
+    marginLeft: 20,
+    borderLeftWidth: 1,
+    borderLeftColor: "#00f0ff",
+    paddingLeft: 10,
   },
 });
 
