@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     margin: 10,
     color: '#00f0ff',
     fontWeight: 'bold',
+    width: '50%',
   },
   valueColumn: {
     borderLeftWidth: 1,
@@ -74,6 +75,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginLeft: 10,
     color: '#00f0ff',
+    width: '50%',
   },
 });
 
