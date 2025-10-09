@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import NestedTable from "./NestedTable";
 
 const TestingPage = () => {
-  return <NestedTable />;
+  return <NestedTable data={{"id": 1, "table":{"col 1": "A", "col 2": "B"}}} tableTitle="Nested Table" />;
 };
 
 export default TestingPage;
